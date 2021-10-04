@@ -6,24 +6,29 @@ namespace DAL
 {
     public class ComponentDAL
     {
-        public void Create(ComponentDTO component) { 
+        public static void Main() {
         
-        }
+            using (var db = new ApplicationDataContext()){
+                
+                // Create
+                db.Add(new ComponentDTO {});
+                db.SaveChanges();
 
-        public List<ComponentDTO> ReadAll() {
-            return new List<ComponentDTO>();
-        }
+                // Read
+                var component = db.DATABASENAAM
+                    .OrderBy(b => b.BlogId)
+                    .First();
 
-        public void Delete(int code) { 
-        
-        }
+                // Update
+                component.Url = "https://devblogs.microsoft.com/dotnet";
+                component.ActionCount.Add(34873);
+                db.SaveChanges();
 
-        public void Update(ComponentDTO component) { 
-        
-        }
-
-        public ComponentDTO Read(int code) {
-            return new ComponentDTO();
+                // Delete
+                db.Remove(component);
+                db.SaveChanges();
+            }
         }
     }
 }
+
