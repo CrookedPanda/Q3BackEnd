@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MachineMonitoring.Controllers
 {
@@ -23,22 +23,23 @@ namespace MachineMonitoring.Controllers
 
             foreach (var item in _logic.ReadAll())
             {
-                components.Add(item.code.ToString() + ", " + item.actionsCount.ToString());
+                components.Add(JsonSerializer.Serialize(item));
             }
             return components.ToArray();
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{code}")]
+        public string Get(int code)
         {
-            return "value";
+            return JsonSerializer.Serialize(_logic.Read(code));
         }
 
         // POST api/<ValuesController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
+
         }
 
         // PUT api/<ValuesController>/5
