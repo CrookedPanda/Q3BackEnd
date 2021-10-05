@@ -8,9 +8,9 @@ namespace Logic
     public class ComponentLogic
     {
         private ComponentDAL _data;
-        public ComponentLogic(ComponentDAL data)
+        public ComponentLogic()
         {
-            _data = data;
+            _data = new ComponentDAL();
         }
 
         public void Create(ComponentDTO component)
