@@ -26,6 +26,8 @@ namespace MachineMonitoring {
         public void ConfigureServices(IServiceCollection services) {
             services.AddSingleton<Imachine_monitoring_poortenHandler, machine_monitoring_poortenHandler>();
             services.AddSingleton<Imachine_monitoring_poortenLogic, machine_monitoring_poortenLogic>();
+            services.AddSingleton<Imonitoring_dataHandler, monitoring_dataHandler>();
+            services.AddSingleton<Imonitoring_dataLogic, monitoring_dataLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c => {
