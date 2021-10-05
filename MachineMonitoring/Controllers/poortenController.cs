@@ -6,26 +6,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DTO;
 
 namespace MachineMonitoring.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ComponentController : ControllerBase
+    public class poortenController : ControllerBase
     {
-        ComponentLogic _logic = new ComponentLogic();
+        Imachine_monitoring_poortenLogic _logic;
+        public poortenController(Imachine_monitoring_poortenLogic logic)
+        {
+            _logic = logic;
+        }
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<machine_monitoring_poortenDTO> Get()
         {
-            List<string> components = new List<string>();
-
-            foreach (var item in _logic.ReadAll())
-            {
-                components.Add(JsonSerializer.Serialize(item));
-            }
-            return components.ToArray();
+            return _logic.ReadAll();
         }
 
         // GET api/<ValuesController>/5
