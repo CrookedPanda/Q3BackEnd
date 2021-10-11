@@ -9,6 +9,7 @@ namespace Logic
         void Delete(int code);
         ComponentDTO Read(int code);
         IEnumerable<machine_monitoring_poortenDTO> ReadAll();
+        IEnumerable<machine_monitoring_poortenDTO> ReadByName(string name);
         void Update(ComponentDTO component);
     }
 }

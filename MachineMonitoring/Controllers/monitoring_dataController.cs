@@ -32,23 +32,5 @@ namespace MachineMonitoring.Controllers
         {
             return "value";
         }
-
-        // POST api/<monitoring_dataController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<monitoring_dataController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<monitoring_dataController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

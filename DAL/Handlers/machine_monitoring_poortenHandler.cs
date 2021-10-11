@@ -15,5 +15,11 @@ namespace DAL.Handlers
             return context.machine_Monitoring_Poorten.ToList();
         }
 
+        public IEnumerable<machine_monitoring_poortenDTO> GetByName(string nm) {
+            using var context = new ApplicationDataContext();
+
+            return context.machine_Monitoring_Poorten. Where(x => x.name == nm).ToList();
+        }
+
     }
 }

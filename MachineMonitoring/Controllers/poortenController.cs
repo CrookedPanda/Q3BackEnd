@@ -27,11 +27,11 @@ namespace MachineMonitoring.Controllers
             return _logic.ReadAll();
         }
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{code}")]
-        public string Get(int code)
+        [HttpGet("{name}")]
+        [Route("PoortNaam/{name}")]
+        public IEnumerable<machine_monitoring_poortenDTO> GetByName(string name)
         {
-            return JsonSerializer.Serialize(_logic.Read(code));
+            return _logic.ReadByName(name);
         }
 
         // POST api/<ValuesController>

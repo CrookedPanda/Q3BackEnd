@@ -22,6 +22,10 @@ namespace Logic
             return _poortenHandler.Get();
         }
 
+        public IEnumerable<machine_monitoring_poortenDTO> ReadByName(string name) {
+            return _poortenHandler.GetByName(name);
+        }
+
         public void Delete(int code)
         {
         }
