@@ -14,5 +14,12 @@ namespace DAL.Handlers
 
             return context.monitoring_Data_202009.ToList();
         }
+
+        public IEnumerable<monitoring_dataDTO> GetByPort(int port)
+        {
+            using var context = new ApplicationDataContext();
+
+            return context.monitoring_Data_202009.Where(x => x.port == port).ToList();
+        }
     }
 }
