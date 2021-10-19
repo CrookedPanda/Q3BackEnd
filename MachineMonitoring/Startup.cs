@@ -28,6 +28,8 @@ namespace MachineMonitoring {
             services.AddSingleton<Imachine_monitoring_poortenLogic, machine_monitoring_poortenLogic>();
             services.AddSingleton<Imonitoring_dataHandler, monitoring_dataHandler>();
             services.AddSingleton<Imonitoring_dataLogic, monitoring_dataLogic>();
+            services.AddSingleton<Iproduction_dataHandler, production_dataHandler>();
+            services.AddSingleton<Iproduction_dataLogic, production_dataLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c => {

@@ -17,5 +17,8 @@ namespace Logic
         {
             return _handler.Get();
         }
+        public IEnumerable<monitoring_dataDTO> GetByPort(int port) {
+            return _handler.GetByPort(port);
+        }
     }
 }

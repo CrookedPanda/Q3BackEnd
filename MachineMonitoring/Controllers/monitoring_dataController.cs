@@ -10,7 +10,7 @@ using DTO;
 
 namespace MachineMonitoring.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/data")]
     [ApiController]
     public class monitoring_dataController : ControllerBase
     {
@@ -24,6 +24,13 @@ namespace MachineMonitoring.Controllers
         public IEnumerable<monitoring_dataDTO> Get()
         {
             return _logic.ReadAll();
+        }
+
+        [HttpGet("{port}")]
+        [Route("port/{port}")]
+        public IEnumerable<monitoring_dataDTO> GetByPort(int port)
+        {
+            return _logic.GetByPort(port);
         }
 
         // GET api/<monitoring_dataController>/5
