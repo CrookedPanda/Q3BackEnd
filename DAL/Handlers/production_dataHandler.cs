@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DAL.Handlers
 {
-    class production_dataHandler : Iproduction_dataHandler
+    public class production_dataHandler : Iproduction_dataHandler
     {
         public IEnumerable<production_dataDTO> Get()
         {

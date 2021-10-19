@@ -13,7 +13,7 @@ namespace DAL
         public DbSet<monitoring_dataDTO> monitoring_Data_202009 { get; set; }
         public DbSet<production_dataDTO> production_data { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            string server = "Server=studmysql01.fhict.local;Uid=dbi340421;Database=dbi340421;Pwd=Dreaming;";
+            string server = "Server=studmysql01.fhict.local;Uid=dbi340421;Database=dbi340421;Pwd=Dreaming;Convert Zero Datetime=True";
             optionsBuilder.UseMySql(server, ServerVersion.AutoDetect(server), options => options.EnableRetryOnFailure());
         }
 

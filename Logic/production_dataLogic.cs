@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Logic
 {
-    public class production_dataLogic
+    public class production_dataLogic : Iproduction_dataLogic
     {
         private readonly Iproduction_dataHandler _handler;
         public production_dataLogic(Iproduction_dataHandler handler)
