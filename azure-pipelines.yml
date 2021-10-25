@@ -42,3 +42,7 @@ steps:
     projectName: 'MachineMonitoring Q3'
 
 - task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
