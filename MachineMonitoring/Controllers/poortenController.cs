@@ -10,7 +10,7 @@ using DTO;
 
 namespace MachineMonitoring.Controllers
 {
-    [Route("api/machine")]
+    [Route("api/poorten")]
     [ApiController]
     public class poortenController : ControllerBase
     {
