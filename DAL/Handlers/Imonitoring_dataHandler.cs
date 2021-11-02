@@ -7,5 +7,6 @@ namespace DAL.Handlers
     {
         IEnumerable<monitoring_dataDTO> Get();
         IEnumerable<monitoring_dataDTO> GetByPort(int port);
+        IEnumerable<monitoring_dataDTO> GetByMachine(int port, int board);
     }
 }

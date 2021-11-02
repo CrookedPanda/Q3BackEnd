@@ -33,6 +33,12 @@ namespace MachineMonitoring.Controllers
             return _logic.GetByPort(port);
         }
 
+        [HttpGet("{port}/{board}")]
+        public IEnumerable<monitoring_dataDTO> GetByMachine(int port, int board)
+        {
+            return _logic.GetByMachine(port, board);
+        }
+
         // GET api/<monitoring_dataController>/5
         [HttpGet("{id}")]
         public string Get(int id)

@@ -26,9 +26,9 @@ namespace Logic
             return machines;
         }
 
-        public List<DateTime> getTimestamps(machine_monitoring_poortenDTO poort) {
+        public List<DateTime> getTimestamps(machine_monitoring_poortenDTO machine) {
             List<DateTime> timestamps = new List<DateTime>();
-            foreach (var data in _dataLogic.GetByPort(poort.port))
+            foreach (var data in _dataLogic.GetByPort(machine.port))
             {
                 timestamps.Add(data.timestamp);
             }
