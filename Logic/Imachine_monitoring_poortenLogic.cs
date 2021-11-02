@@ -11,5 +11,6 @@ namespace Logic
         IEnumerable<machine_monitoring_poortenDTO> ReadAll();
         IEnumerable<machine_monitoring_poortenDTO> ReadByName(string name);
         void Update(ComponentDTO component);
+        IEnumerable<machine_monitoring_poortenDTO> GetMachine(int port, int board);
     }
 }

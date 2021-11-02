@@ -8,23 +8,36 @@ namespace Logic
     public class machine_monitoring_poortenLogic : Imachine_monitoring_poortenLogic
     {
         private readonly Imachine_monitoring_poortenHandler _poortenHandler;
-        public machine_monitoring_poortenLogic(Imachine_monitoring_poortenHandler handler)
+        private readonly Imonitoring_dataLogic _dataLogic;
+        public machine_monitoring_poortenLogic(Imachine_monitoring_poortenHandler handler, Imonitoring_dataLogic dataLogic)
         {
+            _dataLogic = dataLogic;
             _poortenHandler = handler;
         }
 
         public IEnumerable<MachineDTO> getAllMachines()
         {
-            Imonitoring_dataLogic dataLogic; 
+            
             List<MachineDTO> machines = new List<MachineDTO>();
             foreach (var poort in ReadAll())
             {
-                machines.Add(new MachineDTO(poort.port.ToString(), null, dataLogic.GetByPort(poort.port)));
+                machines.Add(new MachineDTO(poort.port.ToString(), null, null));
             }
             return machines;
         }
 
+        public List<DateTime> getTimestamps(machine_monitoring_poortenDTO poort) {
+            List<DateTime> timestamps = new List<DateTime>();
+            foreach (var data in _dataLogic.GetByPort(poort.port))
+            {
+                timestamps.Add(data.timestamp);
+            }
+            return timestamps;
+        }
 
+        public IEnumerable<machine_monitoring_poortenDTO> GetMachine(int port, int board) {
+            return _poortenHandler.GetMachine(port, board);
+        }
 
         public void Create(ComponentDTO component)
         {

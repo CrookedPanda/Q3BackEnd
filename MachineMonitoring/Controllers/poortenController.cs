@@ -34,6 +34,11 @@ namespace MachineMonitoring.Controllers
             return _logic.ReadByName(name);
         }
 
+        [HttpGet("{port}/{board}")]
+        public IEnumerable<machine_monitoring_poortenDTO> GetMachine(int port, int board) {
+            return _logic.GetMachine(port, board);
+        }
+
         // POST api/<ValuesController>
         [HttpPost]
         public void Post([FromBody] string value)

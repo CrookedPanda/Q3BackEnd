@@ -21,5 +21,11 @@ namespace DAL.Handlers
             return context.machine_Monitoring_Poorten. Where(x => x.name == nm).ToList();
         }
 
+        public IEnumerable<machine_monitoring_poortenDTO> GetMachine(int port, int board) {
+            using var context = new ApplicationDataContext();
+
+            return context.machine_Monitoring_Poorten.Where(x => x.board == board && x.port == port).ToList();
+        }
+
     }
 }

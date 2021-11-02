@@ -14,5 +14,11 @@ namespace DAL.Handlers
 
             return context.production_data.ToList();
         }
+
+        public IEnumerable<production_dataDTO> GetByMachine(int port, int board) {
+            using var context = new ApplicationDataContext();
+
+            return context.production_data.Where(x => x.port == port && x.board == board).ToList();
+        }
     }
 }
