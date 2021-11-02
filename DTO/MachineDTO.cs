@@ -5,14 +5,14 @@ namespace DTO
 {
     public class MachineDTO
     {
-        public MachineDTO(string nm, List<ComponentDTO> components, List<UptimeDTO> uptime)
+        public MachineDTO(string nm, List<string> components, List<DateTime> uptime)
         {
             name = nm;
             this.components = components;
             this.uptime = uptime;
         }
         public string name { get; set; }
-        public List<ComponentDTO> components { get; set; }
-        public List<UptimeDTO> uptime { get; set; }
+        public List<string> components { get; set; }
+        public List<DateTime> uptime { get; set; }
     }
 }
