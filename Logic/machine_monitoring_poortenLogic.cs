@@ -13,6 +13,19 @@ namespace Logic
             _poortenHandler = handler;
         }
 
+        public IEnumerable<MachineDTO> getAllMachines()
+        {
+            Imonitoring_dataLogic dataLogic; 
+            List<MachineDTO> machines = new List<MachineDTO>();
+            foreach (var poort in ReadAll())
+            {
+                machines.Add(new MachineDTO(poort.port.ToString(), null, dataLogic.GetByPort(poort.port)));
+            }
+            return machines;
+        }
+
+
+
         public void Create(ComponentDTO component)
         {
         }
