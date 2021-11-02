@@ -7,5 +7,6 @@ namespace Logic
     {
         IEnumerable<monitoring_dataDTO> ReadAll();
         IEnumerable<monitoring_dataDTO> GetByPort(int port);
+        public List<monitoring_dataDTO> CalculateList();
     }
 }

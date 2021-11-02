@@ -39,5 +39,11 @@ namespace MachineMonitoring.Controllers
         {
             return "value";
         }
+
+        [Route("calc")]
+        public void CalculateList()
+        {
+            _logic.CalculateList();
+        }
     }
 }

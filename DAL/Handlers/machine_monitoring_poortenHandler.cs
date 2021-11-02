@@ -12,13 +12,13 @@ namespace DAL.Handlers
         {
             using var context = new ApplicationDataContext();
 
-            return context.machine_Monitoring_Poorten.ToList();
+            return context.machine_monitoring_poorten.ToList();
         }
 
         public IEnumerable<machine_monitoring_poortenDTO> GetByName(string nm) {
             using var context = new ApplicationDataContext();
 
-            return context.machine_Monitoring_Poorten. Where(x => x.name == nm).ToList();
+            return context.machine_monitoring_poorten. Where(x => x.name == nm).ToList();
         }
 
     }

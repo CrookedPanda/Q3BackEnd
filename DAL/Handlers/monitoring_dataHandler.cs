@@ -12,14 +12,14 @@ namespace DAL.Handlers
         {
             using var context = new ApplicationDataContext();
 
-            return context.monitoring_Data_202009.ToList();
+            return context.monitoring_data_202009.OrderBy(x => x.port).ThenBy(x => x.board).ThenBy(x => x.timestamp).ToList();
         }
 
         public IEnumerable<monitoring_dataDTO> GetByPort(int port)
         {
             using var context = new ApplicationDataContext();
 
-            return context.monitoring_Data_202009.Where(x => x.port == port).ToList();
+            return context.monitoring_data_202009.Where(x => x.port == port).ToList();
         }
     }
 }
