@@ -46,6 +46,11 @@ namespace MachineMonitoring.Controllers
             return _logic.getMachineFiltered(port, board);
         }
 
+        [Route("machine")]
+        public IEnumerable<MachineDTO> GetAllMachineFiltered(int port, int board)
+        {
+            return _logic.getAllMachineFiltered();
+        }
 
         // POST api/<ValuesController>
         [HttpPost]
