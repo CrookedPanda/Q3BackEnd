@@ -9,13 +9,13 @@ namespace DTO
         public UptimeDTO(DateTime strt, List<DateTime> ts)
         {
             startTime = strt;
-            timestamps = ts;
             uptime = calcUptime(ts);
+            downtime = 30 - uptime;
         }
 
         public DateTime startTime { get; set; }
-        public List<DateTime> timestamps { get; set; }
         public int uptime { get; set; }
+        public int downtime { get; set; }
 
         private int calcUptime(List<DateTime> ts) {
             int uptimeDefault = 30;
