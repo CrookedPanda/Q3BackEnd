@@ -21,25 +21,29 @@ namespace DTO
             int uptimeDefault = 30;
             TimeSpan? timeOffline = TimeSpan.Parse("00:05:00");
             DateTime? timeStore = null;
-            if (ts != null)
+            if (ts == null)
             {
-                foreach (var item in ts)
+                return 0;
+            }
+            foreach (var item in ts)
+            {
+                if (timeStore == null)
                 {
-                    if (timeStore == null)
-                    {
-                        timeStore = item;
-                    }
-                    var thing = timeStore.HasValue ? item - timeStore : null;
-                    if (thing > timeOffline)
-                    {
-                        TimeSpan time = TimeSpan.Parse(thing.ToString());
-                        uptimeDefault = uptimeDefault - int.Parse(time.TotalMinutes.ToString());
-                    }
                     timeStore = item;
                 }
-                return uptimeDefault;
+                var thing = timeStore.HasValue ? item - timeStore : null;
+                if (thing > timeOffline)
+                {
+                    TimeSpan time = TimeSpan.Parse(thing.ToString());
+                    uptimeDefault = uptimeDefault - Convert.ToInt32(time.TotalMinutes);
+                    if (uptimeDefault <= 0)
+                    {
+                        return 0;
+                    }
+                }
+                timeStore = item;
             }
-            return 0;
+            return uptimeDefault;
         }
     }
 }
