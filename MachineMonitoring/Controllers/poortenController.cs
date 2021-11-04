@@ -10,7 +10,7 @@ using DTO;
 
 namespace MachineMonitoring.Controllers
 {
-    [Route("api/machine")]
+    [Route("api/poorten")]
     [ApiController]
     public class poortenController : ControllerBase
     {
@@ -33,6 +33,19 @@ namespace MachineMonitoring.Controllers
         {
             return _logic.ReadByName(name);
         }
+
+        [HttpGet("{port}/{board}")]
+        public IEnumerable<machine_monitoring_poortenDTO> GetMachine(int port, int board) {
+            return _logic.GetMachine(port, board);
+        }
+        
+        [HttpGet("{port}/{board}")]
+        [Route("machine/{port}/{board}")]
+        public IEnumerable<MachineDTO> GetMachineFiltered(int port, int board)
+        {
+            return _logic.getMachineFiltered(port, board);
+        }
+
 
         // POST api/<ValuesController>
         [HttpPost]

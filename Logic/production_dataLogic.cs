@@ -18,5 +18,10 @@ namespace Logic
         {
             return _handler.Get();
         }
+
+        public IEnumerable<production_dataDTO> GetByMachine(int port, int board)
+        {
+            return _handler.GetByMachine(port, board);
+        }
     }
 }
