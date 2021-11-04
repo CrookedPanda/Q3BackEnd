@@ -13,5 +13,6 @@ namespace Logic
         void Update(ComponentDTO component);
         IEnumerable<machine_monitoring_poortenDTO> GetMachine(int port, int board);
         IEnumerable<MachineDTO> getMachineFiltered(int port, int board);
+        IEnumerable<MachineDTO> getAllMachineFiltered();
     }
 }
