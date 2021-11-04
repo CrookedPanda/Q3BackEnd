@@ -33,7 +33,7 @@ namespace Logic
             List<MachineDTO> machines = new List<MachineDTO>();
             foreach (var poort in ReadAll())
             {
-                if (poort.name != null)
+                if (poort.name != null && getTimestamps(poort).Count > 0)
                 {
                     machines.Add(new MachineDTO(poort.name, getComponentNames(poort), createUptimes(getTimestamps(poort))));
                 }

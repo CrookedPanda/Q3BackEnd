@@ -9,17 +9,41 @@ namespace DTO
         public UptimeDTO(DateTime strt, List<DateTime> ts)
         {
             startTime = strt;
-            timestamps = ts;
-            uptime = calcUptime();
+            uptime = calcUptime(ts);
+            downtime = 30 - uptime;
         }
 
         public DateTime startTime { get; set; }
-        public List<DateTime> timestamps { get; set; }
         public int uptime { get; set; }
+        public int downtime { get; set; }
 
-        private int calcUptime() {
-            //TODO
-            return 0;
+        private int calcUptime(List<DateTime> ts) {
+            int uptimeDefault = 30;
+            TimeSpan? timeOffline = TimeSpan.Parse("00:05:00");
+            DateTime? timeStore = null;
+            if (ts == null)
+            {
+                return 0;
+            }
+            foreach (var item in ts)
+            {
+                if (timeStore == null)
+                {
+                    timeStore = item;
+                }
+                var thing = timeStore.HasValue ? item - timeStore : null;
+                if (thing > timeOffline)
+                {
+                    TimeSpan time = TimeSpan.Parse(thing.ToString());
+                    uptimeDefault = uptimeDefault - Convert.ToInt32(time.TotalMinutes);
+                    if (uptimeDefault <= 0)
+                    {
+                        return 0;
+                    }
+                }
+                timeStore = item;
+            }
+            return uptimeDefault;
         }
     }
 }
