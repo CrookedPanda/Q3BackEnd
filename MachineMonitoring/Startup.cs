@@ -16,6 +16,8 @@ using Logic;
 
 namespace MachineMonitoring {
     public class Startup {
+        private readonly string Q3Origins = "_Q3Origins";
+
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
@@ -30,6 +32,12 @@ namespace MachineMonitoring {
             services.AddSingleton<Imonitoring_dataLogic, monitoring_dataLogic>();
             services.AddSingleton<Iproduction_dataHandler, production_dataHandler>();
             services.AddSingleton<Iproduction_dataLogic, production_dataLogic>();
+
+            services.AddCors(options => {
+                options.AddPolicy(Q3Origins, builder => {
+                    builder.WithOrigins("http://localhost:3000");
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c => {
@@ -48,6 +56,8 @@ namespace MachineMonitoring {
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(Q3Origins);
 
             app.UseAuthorization();
 
