@@ -23,7 +23,7 @@ namespace Logic
             List<MachineDTO> machines = new List<MachineDTO>();
             foreach (var poort in GetMachine(port, board))
             {
-                machines.Add(new MachineDTO(poort.name, getComponentNames(poort), createUptimes(getTimestamps(poort))));
+                machines.Add(new MachineDTO(poort.name, getComponentNames(poort), GetOneDay(createUptimes(getTimestamps(poort)))) );
             }
             return machines;
         }
@@ -35,10 +35,15 @@ namespace Logic
             {
                 if (poort.name != null && getTimestamps(poort).Count > 0)
                 {
-                    machines.Add(new MachineDTO(poort.name, getComponentNames(poort), createUptimes(getTimestamps(poort))));
+                    machines.Add(new MachineDTO(poort.name, getComponentNames(poort), GetOneDay(createUptimes(getTimestamps(poort)))) );
                 }
             }
             return machines;
+        }
+
+        public List<UptimeDTO> GetOneDay(List<UptimeDTO> ts) {
+            List<UptimeDTO> FirstDay = ts.Take(48).ToList();
+            return FirstDay;
         }
 
         public List<DateTime> getTimestamps(machine_monitoring_poortenDTO machine) {
@@ -54,7 +59,7 @@ namespace Logic
             List<UptimeDTO> uptimes = new List<UptimeDTO>();
             try
             {
-                DateTime currentTime = timestamps.Min(); //tijd van nu
+                DateTime currentTime = timestamps.Min().Date; //tijd van nu
                 List<DateTime> timestampsToBeAdded = new List<DateTime>();
                     foreach (DateTime time in timestamps)
                     {
@@ -64,7 +69,7 @@ namespace Logic
                         }
                         else //als de tijd na dit half uur blok is, maak een nieuw tijdblok van 30 minuten 
                         {
-                            uptimes.Add(new UptimeDTO(currentTime, timestampsToBeAdded)); //voeg dit halve uur blok toe aan de lijst
+                            uptimes.Add(new UptimeDTO(currentTime, timestampsToBeAdded)); //voeg dit halve uur blok toe aan de lijst 
                             currentTime = currentTime.AddMinutes(30); 
                             timestampsToBeAdded = new List<DateTime>(); //als ik hier de lijst clear ipv een nieuwe maken, delete ik ook de timestampsToBeAdded uit uptimeDTO
                         }

@@ -8,12 +8,14 @@ namespace DTO
     {
         public UptimeDTO(DateTime strt, List<DateTime> ts)
         {
-            startTime  = strt.TimeOfDay.TotalHours;
+            startTime  = strt.ToString("HH:mm");
+            ts.Insert(0, strt);
+            ts.Add(strt.AddMinutes(30));
             uptime = calcUptime(ts);
             downtime = 30 - uptime;
         }
 
-        public double startTime { get; set; }
+        public string startTime { get; set; }
         public int uptime { get; set; }
         public int downtime { get; set; }
 
