@@ -36,7 +36,7 @@ namespace Logic
                 if (treeview == null) {
                     continue;
                 }
-                components.Add(new ComponentDTO(treeview.naam, treeview.id, 0, 0, 0));   
+                components.Add(new ComponentDTO(treeview.naam, treeview.id, 0, c.board, c.port));   
             }
 
             return components;
