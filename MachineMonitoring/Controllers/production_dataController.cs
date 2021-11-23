@@ -26,6 +26,12 @@ namespace MachineMonitoring.Controllers
             return _logic.ReadAll();
         }
 
+        [HttpGet]
+        public IEnumerable<ComponentDTO> GetComponent(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpGet("{port}/{board}")]
         public IEnumerable<production_dataDTO> GetByMachine(int port, int board)
         {

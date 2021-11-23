@@ -96,10 +96,6 @@ namespace Logic
             return _poortenHandler.GetMachine(port, board);
         }
 
-        public void Create(ComponentDTO component)
-        {
-        }
-
         public IEnumerable<machine_monitoring_poortenDTO> ReadAll()
         {
             return _poortenHandler.Get();
