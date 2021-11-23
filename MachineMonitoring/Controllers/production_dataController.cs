@@ -21,16 +21,17 @@ namespace MachineMonitoring.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<production_dataDTO> Get()
+        public IEnumerable<ComponentDTO> Get()
         {
-            return _logic.ReadAll();
+            return _logic.GetAllComponents();
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IEnumerable<ComponentDTO> GetComponent(string name)
         {
             throw new NotImplementedException();
         }
+        */
 
         [HttpGet("{port}/{board}")]
         public IEnumerable<production_dataDTO> GetByMachine(int port, int board)

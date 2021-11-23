@@ -7,7 +7,7 @@ using System.Linq;
 namespace Logic
 {
     public class machine_monitoring_poortenLogic : Imachine_monitoring_poortenLogic
-    {
+    {   
         private readonly Imachine_monitoring_poortenHandler _poortenHandler;
         private readonly Imonitoring_dataLogic _dataLogic;
         private readonly Iproduction_dataLogic _productionLogic;

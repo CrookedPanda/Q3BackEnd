@@ -7,5 +7,6 @@ namespace Logic
     {
         IEnumerable<production_dataDTO> ReadAll();
         IEnumerable<production_dataDTO> GetByMachine(int port, int board);
+        IEnumerable<ComponentDTO> GetAllComponents();
     }
 }

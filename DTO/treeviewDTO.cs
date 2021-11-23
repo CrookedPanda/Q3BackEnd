@@ -23,7 +23,7 @@ namespace DTO
         public decimal aanschafwaarde { get; set; }
         public int afschrijving { get; set; }
         public int jaarafschrijving { get; set; }
-        public int afschrijvingen { get; set; }
+        public int afschrijvingeen { get; set; }
         public decimal budgetvorig { get; set; }
         public decimal budgetnu { get; set; }
         public int melden { get; set; }
@@ -31,7 +31,7 @@ namespace DTO
         public int werkopdracht { get; set; }
         public int fabrikanten_id { get; set; }
         public int leverancieren_id { get; set; }
-        public int locatie_id { get; set; }
+        public int locaties_id { get; set; }
         public int kostenplaats_id { get; set; }
         public int parent { get; set; }
         public int new_id { get; set; }
@@ -46,7 +46,7 @@ namespace DTO
         public string gecodeerd { get; set; }
         public int eigenaar_id { get; set; }
         public int keuringsplichtig { get; set; }
-        public DateTime laatsgeteld { get; set; }
+        public DateTime laatstgeteld { get; set; }
         public int onderhoudsbedrijf_id { get; set; }
         public string stamkaart_old { get; set; }
         public int objecttemplate_id { get; set; }
