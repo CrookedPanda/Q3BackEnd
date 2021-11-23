@@ -46,7 +46,7 @@ namespace DTO
         public string gecodeerd { get; set; }
         public int eigenaar_id { get; set; }
         public int keuringsplichtig { get; set; }
-        public DateTime laatstgeteld { get; set; }
+        public DateTime? laatstgeteld { get; set; }
         public int onderhoudsbedrijf_id { get; set; }
         public string stamkaart_old { get; set; }
         public int objecttemplate_id { get; set; }
@@ -54,13 +54,13 @@ namespace DTO
         public int nlsfb2_id { get; set; }
         public decimal vastgoed_aantal { get; set; }
         public int vastgoed_eenheden_id { get; set; }
-        public int koppelpersoon_id { get; set; }
-        public int koppelrelatie2_id { get; set; }
-        public int koppelpersoon2_id { get; set; }
+        public int? koppelpersoon_id { get; set; }
+        public int? koppelrelatie2_id { get; set; }
+        public int? koppelpersoon2_id { get; set; }
         public int medewerker_id { get; set; }
         public int omschrijving_id { get; set; }
         public int opgenomen_in_begroting { get; set; }
-        public DateTime opgenomen_in_begroting_datum { get; set; }
+        public DateTime? opgenomen_in_begroting_datum { get; set; }
         public int uitleen_magazijn_id { get; set; }
         public int uitleen_treeviewsoort_id { get; set; }
         public int is_uitgeleend { get; set; }
@@ -90,7 +90,7 @@ namespace DTO
         public int geaccepteerd { get; set; }
         public int sweep_api { get; set; }
         public int laatste_beurt { get; set; }
-        public int laatste_servicebeurt_id { get; set; }
+        public int? laatste_servicebeurt_id { get; set; }
         public int hoofdprocessen_id { get; set; }
         public int processtappen_id { get; set; }
         public int machine_monitoringen_timeout_sec { get; set; }

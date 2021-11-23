@@ -33,6 +33,9 @@ namespace Logic
             foreach (production_dataDTO c in ReadAll().GroupBy(x => x.treeview_id).Select(y => y.First()))
             {
                 treeviewDTO treeview = _treeviewhandler.GetById(c.treeview_id);
+                if (treeview == null) {
+                    continue;
+                }
                 components.Add(new ComponentDTO(treeview.naam, treeview.id, 0, 0, 0));   
             }
 
