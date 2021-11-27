@@ -24,5 +24,6 @@ namespace Logic
         public IEnumerable<monitoring_dataDTO> GetByMachine(int port, int board) {
             return _handler.GetByMachine(port, board);
         }
+
     }
 }

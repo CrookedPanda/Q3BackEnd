@@ -20,5 +20,11 @@ namespace DAL.Handlers
 
             return context.production_data.Where(x => x.port == port && x.board == board).ToList();
         }
+
+        public IEnumerable<production_dataDTO> GetByTreeViewId(int treeview_id) {
+            using var context = new ApplicationDataContext();
+
+            return context.production_data.Where(x => x.treeview_id == treeview_id).ToList();
+        }
     }
 }

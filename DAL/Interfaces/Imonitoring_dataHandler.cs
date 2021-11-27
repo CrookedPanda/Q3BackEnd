@@ -1,4 +1,5 @@
 ﻿using DTO;
+using System;
 using System.Collections.Generic;
 
 namespace DAL.Handlers
@@ -8,5 +9,6 @@ namespace DAL.Handlers
         IEnumerable<monitoring_dataDTO> Get();
         IEnumerable<monitoring_dataDTO> GetByPort(int port);
         IEnumerable<monitoring_dataDTO> GetByMachine(int port, int board);
+        IEnumerable<monitoring_dataDTO> GetByMachineDate(int port, int board, DateTime start, DateTime end);
     }
 }
