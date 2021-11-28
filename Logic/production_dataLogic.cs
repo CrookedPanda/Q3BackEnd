@@ -68,8 +68,44 @@ namespace Logic
             }
 
             // Maak component
-            return new ComponentDTO(treeview.naam, treeview.id, actions.Count(), 0, 0);
+            return new ComponentDTO(treeview.naam, treeview.id, actions.Count(), 0, 0, getWeeklyActions(actions));
         }
 
+
+        private List<ActionsDTO> getWeeklyActions(List<monitoring_dataDTO> actions)
+        {
+            List<DateTime> timestamps = new List<DateTime>();
+            foreach (var item in actions)
+            {
+                timestamps.Add(item.timestamp);
+            }
+
+            List<ActionsDTO> actionsPerWeek = new List<ActionsDTO>();
+            int weeknr = 1;
+            try
+            {
+                DateTime currentTime = timestamps.Min().Date; //tijd van nu
+                List<DateTime> getActionsCount = new List<DateTime>();
+                foreach (DateTime time in timestamps)
+                {
+                    if (time < currentTime.AddDays(7)) //Kijk of de current entry waar je naar kijkt nog in de week zit
+                    {
+                        getActionsCount.Add(time);
+                    }
+                    else //als de tijd na deze week is, maak een nieuwe week
+                    {
+                        actionsPerWeek.Add(new ActionsDTO(weeknr, getActionsCount.Count())); //voeg dit halve uur blok toe aan de lijst 
+                        currentTime = currentTime.AddDays(7);
+                        weeknr++;
+                        getActionsCount = new List<DateTime>(); //hier moet ik nieuwe maken
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return actionsPerWeek;
+        }
     }
 }
