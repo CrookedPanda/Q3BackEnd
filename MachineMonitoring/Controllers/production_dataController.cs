@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MachineMonitoring.Controllers
 {
-    [Route("api/component")]
+    [Route("api/components")]
     [ApiController]
     public class production_dataController : ControllerBase
     {
@@ -21,9 +22,22 @@ namespace MachineMonitoring.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<production_dataDTO> Get()
+        public IEnumerable<ComponentDTO> Get()
         {
-            return _logic.ReadAll();
+            return _logic.GetAllComponents();
+        }
+
+        [HttpGet("{treeview_id}")]
+        public ComponentDTO GetComponent(int treeview_id)
+        {
+            return _logic.GetComponent(treeview_id);
+        }
+        
+
+        [HttpGet("{port}/{board}")]
+        public IEnumerable<production_dataDTO> GetByMachine(int port, int board)
+        {
+            return _logic.GetByMachine(port, board);
         }
     }
 }
