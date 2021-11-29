@@ -68,7 +68,10 @@ namespace Logic
                 DateTime end = pd.end_date.Date.Add(pd.end_time);
                 actions.AddRange(_monitoringData.GetByMachineDate(pd.port, pd.board, start, end));
             }
-
+            if (actions.Count() == 0)
+            {
+                return null;
+            }
             // Maak component
             return new ComponentDTO(treeview.naam, treeview.id, actions.Count(), 0, 0, getWeeklyActions(actions), getPastMaintenance(getComponentMaintenance(treeview.id)), getFutureMaintenance(getComponentMaintenance(treeview.id)));
         }
