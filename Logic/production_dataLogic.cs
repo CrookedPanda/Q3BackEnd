@@ -52,6 +52,7 @@ namespace Logic
             return components;
         }
 
+
         public ComponentDTO GetComponent(int treeview_id) {
             treeviewDTO treeview = _treeviewhandler.GetById(treeview_id); // nu kan je de data uit treeview gebruiken
             List<production_dataDTO> productionData = GetByTreeViewId(treeview_id).ToList(); // Alle productiondata (wanneer die op een machine heeft gezeten)
