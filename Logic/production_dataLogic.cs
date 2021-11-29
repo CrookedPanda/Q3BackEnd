@@ -12,11 +12,13 @@ namespace Logic
         private readonly Iproduction_dataHandler _handler;
         private readonly ItreeviewHandler _treeviewhandler;
         private readonly Imonitoring_dataHandler _monitoringData;
-        public production_dataLogic(Iproduction_dataHandler handler, ItreeviewHandler treeviewhandler, Imonitoring_dataHandler monitoringData)
+        private readonly Icomponent_maintenanceHandler _maintenancehandler;
+        public production_dataLogic(Iproduction_dataHandler handler, ItreeviewHandler treeviewhandler, Imonitoring_dataHandler monitoringData, Icomponent_maintenanceHandler maintenancehandler)
         {
             _treeviewhandler = treeviewhandler;
             _handler = handler;
             _monitoringData = monitoringData;
+            _maintenancehandler = maintenancehandler;
         }
 
         public IEnumerable<production_dataDTO> ReadAll()
@@ -68,10 +70,10 @@ namespace Logic
             }
 
             // Maak component
-            return new ComponentDTO(treeview.naam, treeview.id, actions.Count(), 0, 0, getWeeklyActions(actions));
+            return new ComponentDTO(treeview.naam, treeview.id, actions.Count(), 0, 0, getWeeklyActions(actions), getPastMaintenance(getComponentMaintenance(treeview.id)), getFutureMaintenance(getComponentMaintenance(treeview.id)));
         }
 
-
+        //method om de acties in weken te verdelen
         private List<ActionsDTO> getWeeklyActions(List<monitoring_dataDTO> actions)
         {
             List<DateTime> timestamps = new List<DateTime>();
@@ -106,6 +108,39 @@ namespace Logic
             }
 
             return actionsPerWeek;
+        }
+
+        private List<component_maintenanceDTO> getComponentMaintenance(int id) {
+            return _maintenancehandler.GetByTreeViewId(id).ToList();
+        }
+
+        private List<component_maintenanceDTO> getFutureMaintenance(List<component_maintenanceDTO> maintenance) {
+            List<component_maintenanceDTO> futureMaintenance = new List<component_maintenanceDTO>();
+
+            foreach (var item in maintenance)
+            {
+                if (item.time > DateTime.Now)
+                {
+                    futureMaintenance.Add(item);
+                }
+            }
+
+            return futureMaintenance;
+        }
+
+        private List<component_maintenanceDTO> getPastMaintenance(List<component_maintenanceDTO> maintenance)
+        {
+            List<component_maintenanceDTO> futureMaintenance = new List<component_maintenanceDTO>();
+
+            foreach (var item in maintenance)
+            {
+                if (item.time < DateTime.Now)
+                {
+                    futureMaintenance.Add(item);
+                }
+            }
+
+            return futureMaintenance;
         }
     }
 }

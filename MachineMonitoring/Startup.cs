@@ -33,6 +33,7 @@ namespace MachineMonitoring {
             services.AddSingleton<Iproduction_dataHandler, production_dataHandler>();
             services.AddSingleton<Iproduction_dataLogic, production_dataLogic>();
             services.AddSingleton<ItreeviewHandler, treeviewHandler>();
+            services.AddSingleton<Icomponent_maintenanceHandler, component_maintenanceHandler>();
 
             services.AddCors(options => {
                 options.AddPolicy(Q3Origins, builder => {
