@@ -24,4 +24,8 @@ internal class ProductionDataHandlerMock : Iproduction_dataHandler {
     public IEnumerable<production_dataDTO> GetByMachine(int port, int board) {
         return ProductionData.Where(x => x.port == port && x.board == board);
     }
+
+    public IEnumerable<production_dataDTO> GetByTreeViewId(int treeview_id) {
+        return ProductionData.Where(x => x.treeview_id == treeview_id);
+    }
 }

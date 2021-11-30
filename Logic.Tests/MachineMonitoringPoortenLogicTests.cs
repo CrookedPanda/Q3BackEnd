@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using DAL.Handlers;
+using DTO;
 using Logic.Tests.DalMock.Handlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -31,8 +32,9 @@ public class MachineMonitoringPoortenLogicTests {
 
     private static machine_monitoring_poortenLogic CreatePoortenLogic() {
         PoortenHandlerMock poortenHandler = new PoortenHandlerMock();
-        monitoring_dataLogic monitoringDataLogic = new monitoring_dataLogic(new MonitoringDataHandlerMock());
-        production_dataLogic productionDataLogic = new production_dataLogic(new ProductionDataHandlerMock());
+        MonitoringDataHandlerMock monitoringDataHandler = new MonitoringDataHandlerMock();
+        monitoring_dataLogic monitoringDataLogic = new monitoring_dataLogic(monitoringDataHandler);
+        production_dataLogic productionDataLogic = new production_dataLogic(new ProductionDataHandlerMock(), new TreeViewHandlerMock(), monitoringDataHandler, new ComponentMaintenanceHandlerMock());
         return new machine_monitoring_poortenLogic(poortenHandler, monitoringDataLogic, productionDataLogic);
     }
 }

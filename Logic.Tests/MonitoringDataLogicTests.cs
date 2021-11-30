@@ -12,7 +12,7 @@ public class MonitoringDataLogicTests {
     public void ReadAll_ReturnsAllData() {
         monitoring_dataLogic monitoringDataLogic = new monitoring_dataLogic(new MonitoringDataHandlerMock());
         IEnumerable<monitoring_dataDTO> monitoringData = monitoringDataLogic.ReadAll();
-        Assert.AreEqual(8, monitoringData.Count());
+        Assert.AreEqual(9, monitoringData.Count());
     }
 
     [TestMethod]
