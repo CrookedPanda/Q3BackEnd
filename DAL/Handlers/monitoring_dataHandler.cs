@@ -28,6 +28,13 @@ namespace DAL.Handlers
             return context.monitoring_Data_202009.Where(x => x.port == port && x.board == board).ToList();
         }
 
+        public IEnumerable<monitoring_dataDTO> GetByMachineOneDay(int port, int board)
+        {
+            using var context = new ApplicationDataContext();
+
+            return context.monitoring_Data_202009.Where(x => x.port == port && x.board == board && x.datum < new DateTime(2020, 9, 2).AddMinutes(40)).ToList();
+        }
+
         public IEnumerable<monitoring_dataDTO> GetByMachineDate(int port, int board, DateTime start, DateTime end)
         {
             using var context = new ApplicationDataContext();
