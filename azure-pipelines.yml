@@ -26,11 +26,11 @@ steps:
 
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'Sonar_Con'
+    SonarCloud: 'Sonar_Con_BackEnd'
     organization: 'groop2'
     scannerMode: 'MSBuild'
-    projectKey: 'Groop2_MachineMonitoring-Q3'
-    projectName: 'MachineMonitoring Q3'
+    projectKey: 'Groop2_Q3BackEnd'
+    projectName: 'Q3BackEnd'
 
 
 - task: VSBuild@1
