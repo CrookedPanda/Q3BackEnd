@@ -48,7 +48,7 @@ namespace Logic
 
         public List<DateTime> getTimestamps(machine_monitoring_poortenDTO machine) {
             List<DateTime> timestamps = new List<DateTime>();
-            foreach (var data in _dataLogic.GetByMachine(machine.port, machine.board))
+            foreach (var data in _dataLogic.GetByMachineOneDay(machine.port, machine.board))
             {
                 timestamps.Add(data.timestamp);
             }

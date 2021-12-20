@@ -8,5 +8,6 @@ namespace Logic
         IEnumerable<monitoring_dataDTO> ReadAll();
         IEnumerable<monitoring_dataDTO> GetByPort(int port);
         IEnumerable<monitoring_dataDTO> GetByMachine(int port, int board);
+        IEnumerable<monitoring_dataDTO> GetByMachineOneDay(int port, int board);
     }
 }
