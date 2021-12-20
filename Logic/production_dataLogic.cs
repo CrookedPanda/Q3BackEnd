@@ -77,6 +77,73 @@ namespace Logic
             return new ComponentDTO(treeview.naam, treeview.id, actions.Count(), 0, 0, getWeeklyActions(actions), getPastMaintenance(getComponentMaintenance(treeview.id)), getFutureMaintenance(getComponentMaintenance(treeview.id)));
         }
 
+        public IEnumerable<ComponentDTO> GetComponentNames() {
+            List<ComponentDTO> components = new List<ComponentDTO>();
+            foreach (production_dataDTO c in ReadAll().GroupBy(x => x.treeview_id).Select(y => y.First())) // <--- Krijg alle production_data zonder duplicates 
+            {
+                ComponentDTO component = GetComponentName(c.treeview_id);
+
+                if (component == null)
+                {
+                    continue;
+                }
+
+                components.Add(component);
+            }
+
+            return components;
+        }
+
+        public ComponentDTO GetComponentName(int treeview_id)
+        {
+            treeviewDTO treeview = _treeviewhandler.GetById(treeview_id);
+            return new ComponentDTO(treeview.naam, treeview.id, 0, 0, 0, null, null, null);
+        }
+
+        public LifepageDTO GetLifespan(int treeview_id) {
+            treeviewDTO treeview = _treeviewhandler.GetById(treeview_id); // nu kan je de data uit treeview gebruiken
+            List<production_dataDTO> productionData = GetByTreeViewId(treeview_id).ToList(); // Alle productiondata (wanneer die op een machine heeft gezeten)
+            List<monitoring_dataDTO> actions = new List<monitoring_dataDTO>();
+            //als er geen data staat in de treeview kan je voor nu nog geen component maken
+            if (treeview == null)
+            {
+                return null;
+            }
+
+            //bereken acties
+            foreach (var pd in productionData)
+            {
+                DateTime start = pd.start_date.Date.Add(pd.start_time);
+                DateTime end = pd.end_date.Date.Add(pd.end_time);
+                actions.AddRange(_monitoringData.GetByMachineDate(pd.port, pd.board, start, end));
+            }
+            if (actions.Count() == 0)
+            {
+                return null;
+            }
+            // Maak component
+            return new LifepageDTO(treeview.id, treeview.naam, treeview.omschrijving, actions.Count(), 150000);
+        }
+
+        public IEnumerable<LifepageDTO> GetAllLifespans() {
+            List<LifepageDTO> lifespans = new List<LifepageDTO>();
+            foreach (production_dataDTO c in ReadAll().GroupBy(x => x.treeview_id).Select(y => y.First())) 
+            {
+                treeviewDTO treeview = _treeviewhandler.GetById(c.treeview_id);
+
+                LifepageDTO lifespan = GetLifespan(c.treeview_id);
+
+                if (lifespan == null)
+                {
+                    continue;
+                }
+
+                lifespans.Add(lifespan);
+            }
+
+            return lifespans;
+        }
+
         //method om de acties in weken te verdelen
         private List<ActionsDTO> getWeeklyActions(List<monitoring_dataDTO> actions)
         {
