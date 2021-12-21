@@ -5,10 +5,9 @@ namespace DTO
 {
     public class ComponentDTO
     {
-        public ComponentDTO(string naam, string desc, int id1, int actions, int board, int port, List<ActionsDTO> weeks, List<component_maintenanceDTO> past, List<component_maintenanceDTO> future)
+        public ComponentDTO(string naam, int id1, int actions, int board, int port, List<ActionsDTO> weeks, List<component_maintenanceDTO> past, List<component_maintenanceDTO> future)
         {
             this.naam = naam;
-            description = desc;
             treeview_id = id1;
             actionsCount = actions;
             this.board = board;
@@ -19,7 +18,6 @@ namespace DTO
         }
 
         public string naam { get; set; }
-        public string description { get; set; }
         public int treeview_id { get; set; }
         public int actionsCount{ get; set; }
         public int board { get; set; }
