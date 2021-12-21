@@ -74,7 +74,7 @@ namespace Logic
                 return null;
             }
             // Maak component
-            return new ComponentDTO(treeview.naam, treeview.omschrijving, treeview.id, actions.Count(), 0, 0, getWeeklyActions(actions), getPastMaintenance(getComponentMaintenance(treeview.id)), getFutureMaintenance(getComponentMaintenance(treeview.id)));
+            return new ComponentDTO(treeview.omschrijving, treeview.id, actions.Count(), 0, 0, getWeeklyActions(actions), getPastMaintenance(getComponentMaintenance(treeview.id)), getFutureMaintenance(getComponentMaintenance(treeview.id)));
         }
 
         public IEnumerable<ComponentDTO> GetComponentNames() {
@@ -97,7 +97,7 @@ namespace Logic
         public ComponentDTO GetComponentName(int treeview_id)
         {
             treeviewDTO treeview = _treeviewhandler.GetById(treeview_id);
-            return new ComponentDTO(treeview.naam, treeview.omschrijving, treeview.id, 0, 0, 0, null, null, null);
+            return new ComponentDTO(treeview.omschrijving, treeview.id, 0, 0, 0, null, null, null);
         }
 
         public LifepageDTO GetLifespan(int treeview_id) {
