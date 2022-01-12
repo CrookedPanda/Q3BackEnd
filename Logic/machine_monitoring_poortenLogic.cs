@@ -18,27 +18,22 @@ namespace Logic
             _productionLogic = productionLogic;
         }
 
-        public IEnumerable<MachineDTO> getMachineFiltered(int port, int board)
-        {
+        public IEnumerable<MachineDTO> getMachineFiltered(int port, int board) {
             List<MachineDTO> machines = new List<MachineDTO>();
-            foreach (var poort in GetMachine(port, board))
-            {
-                machines.Add(new MachineDTO(poort.name, getComponentNames(poort), GetOneDay(createUptimes(getTimestamps(poort)))) );
+            foreach (machine_monitoring_poortenDTO poort in GetMachine(port, board)) {
+                List<DateTime> timestamps = getTimestamps(poort);
+                machines.Add(new MachineDTO(poort.name, getComponentNames(poort), CreateUptimes(timestamps)));
             }
             return machines;
         }
 
-        public IEnumerable<MachineDTO> getAllMachineFiltered()
-        {
-            List<MachineDTO> machines = new List<MachineDTO>();
-            foreach (var poort in ReadAll())
-            {
-                if (poort.name != null && getTimestamps(poort).Count > 0)
-                {
-                    machines.Add(new MachineDTO(poort.name, getComponentNames(poort), GetOneDay(createUptimes(getTimestamps(poort)))) );
+        public IEnumerable<MachineDTO> getAllMachineFiltered() {
+            foreach (machine_monitoring_poortenDTO poort in ReadAll()) {
+                List<DateTime> timestamps = getTimestamps(poort);
+                if (poort.name != null && timestamps.Count > 0) {
+                    yield return new MachineDTO(poort.name, getComponentNames(poort), CreateUptimes(timestamps));
                 }
             }
-            return machines;
         }
 
         public List<UptimeDTO> GetOneDay(List<UptimeDTO> ts) {
@@ -48,39 +43,36 @@ namespace Logic
 
         public List<DateTime> getTimestamps(machine_monitoring_poortenDTO machine) {
             List<DateTime> timestamps = new List<DateTime>();
-            foreach (var data in _dataLogic.GetByMachine(machine.port, machine.board))
+            foreach (var data in _dataLogic.GetByMachineOneDay(machine.port, machine.board))
             {
                 timestamps.Add(data.timestamp);
             }
             return timestamps;
         }
 
-        public List<UptimeDTO> createUptimes(List<DateTime> timestamps) {
-            List<UptimeDTO> uptimes = new List<UptimeDTO>();
-            try
-            {
-                DateTime currentTime = timestamps.Min().Date; //tijd van nu
-                List<DateTime> timestampsToBeAdded = new List<DateTime>();
-                    foreach (DateTime time in timestamps)
-                    {
-                        if (time < currentTime.AddMinutes(30)) //Kijk of de current entry waar je naar kijkt nog in het half uur blok zit
-                        {
-                            timestampsToBeAdded.Add(time); //Voeg tijd toe aan lijst met timestamps
-                        }
-                        else //als de tijd na dit half uur blok is, maak een nieuw tijdblok van 30 minuten 
-                        {
-                            uptimes.Add(new UptimeDTO(currentTime, timestampsToBeAdded)); //voeg dit halve uur blok toe aan de lijst 
-                            currentTime = currentTime.AddMinutes(30); 
-                            timestampsToBeAdded = new List<DateTime>(); //als ik hier de lijst clear ipv een nieuwe maken, delete ik ook de timestampsToBeAdded uit uptimeDTO
-                        }
-                    }
-            }
-            catch (Exception)
-            {
-            }
-            
+        private IEnumerable<UptimeDTO> CreateUptimes(List<DateTime> timeStamps) {
+            bool on = true;
+            DateTime maxTime = timeStamps.Max();
 
-            return uptimes;
+            DateTime? start = null;
+            DateTime? lastTimeStamp = null;
+            foreach (DateTime timeStamp in timeStamps) {
+                if (maxTime.Subtract(timeStamp).TotalDays > 1) {
+                    continue;
+                }
+                if (start == null) {
+                    start = lastTimeStamp = timeStamp;
+                    continue;
+                }
+
+                TimeSpan span = timeStamp.Subtract(lastTimeStamp.Value);
+                lastTimeStamp = timeStamp;
+                if (span.TotalMinutes > 2.0d) {
+                    yield return new UptimeDTO(start.Value, timeStamp, on ? "on" : "off");
+                    start = timeStamp;
+                    on = !on;
+                }
+            }
         }
 
         public List<string> getComponentNames(machine_monitoring_poortenDTO machine) {
