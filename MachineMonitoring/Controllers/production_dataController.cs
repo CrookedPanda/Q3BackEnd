@@ -39,5 +39,11 @@ namespace MachineMonitoring.Controllers
         {
             return _logic.GetByMachine(port, board);
         }
+
+        [HttpGet("names")]
+        public IEnumerable<ComponentDTO> GetNames()
+        {
+            return _logic.GetComponentNames();
+        }
     }
 }

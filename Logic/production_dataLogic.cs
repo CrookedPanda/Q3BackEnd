@@ -97,6 +97,10 @@ namespace Logic
         public ComponentDTO GetComponentName(int treeview_id)
         {
             treeviewDTO treeview = _treeviewhandler.GetById(treeview_id);
+            if (treeview == null)
+            {
+                return null;
+            }
             return new ComponentDTO(treeview.omschrijving, treeview.id, 0, 0, 0, null, null, null);
         }
 
