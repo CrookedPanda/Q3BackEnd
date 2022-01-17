@@ -39,7 +39,7 @@ namespace DAL.Handlers
         {
             using var context = new ApplicationDataContext();
 
-            return context.monitoring_Data_202009.Where(x => x.port == port && x.board == board && x.timestamp > start && x.timestamp < end).ToList();
+             return context.monitoring_Data_202009.Where(x => x.port == port && x.board == board && x.timestamp > start && x.timestamp < end).ToList();
         }
 
         public int GetCountByMachineDate(int port, int board, DateTime start, DateTime end)
