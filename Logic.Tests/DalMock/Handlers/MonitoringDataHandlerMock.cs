@@ -34,4 +34,12 @@ internal class MonitoringDataHandlerMock : Imonitoring_dataHandler {
     public IEnumerable<monitoring_dataDTO> GetByMachineDate(int port, int board, DateTime start, DateTime end) {
         return MonitoringData.Where(x => x.port == port && x.board == board && x.timestamp > start && x.timestamp < end);
     }
+
+    public IEnumerable<monitoring_dataDTO> GetByMachineOneDay(int port, int board) {
+        return MonitoringData.Where(x => x.port == port && x.board == board && x.datum < new DateTime(2020, 9, 2).AddMinutes(40));
+    }
+
+    public int GetCountByMachineDate(int port, int board, DateTime start, DateTime end) {
+        return MonitoringData.Count(x => x.port == port && x.board == board && x.timestamp > start && x.timestamp < end);
+    }
 }
