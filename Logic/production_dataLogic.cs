@@ -104,6 +104,16 @@ namespace Logic
             return new ComponentDTO(treeview.omschrijving, treeview.id, 0, 0, 0, null, null, null);
         }
 
+        public string GetComponentNameString(int treeview_id)
+        {
+            treeviewDTO treeview = _treeviewhandler.GetById(treeview_id);
+            if (treeview == null)
+            {
+                return null;
+            }
+            return treeview.omschrijving;
+        }
+
         public LifepageDTO GetLifespan(int treeview_id) {
             treeviewDTO treeview = _treeviewhandler.GetById(treeview_id); // nu kan je de data uit treeview gebruiken
             List<production_dataDTO> productionData = GetByTreeViewId(treeview_id).ToList(); // Alle productiondata (wanneer die op een machine heeft gezeten)

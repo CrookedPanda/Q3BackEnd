@@ -87,7 +87,7 @@ namespace Logic
             List<string> components = new List<string>();
             foreach (var component in _productionLogic.GetByMachine(machine.port, machine.board))
             {
-                components.Add(component.treeview_id.ToString() + ", " + component.treeview2_id.ToString());
+                components.Add(_productionLogic.GetComponentNameString(component.treeview_id));
             }
             return components;
         }

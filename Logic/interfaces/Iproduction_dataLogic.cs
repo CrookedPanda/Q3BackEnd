@@ -12,5 +12,6 @@ namespace Logic
         LifepageDTO GetLifespan(int treeview_id);
         IEnumerable<LifepageDTO> GetAllLifespans();
         IEnumerable<ComponentDTO> GetComponentNames();
+        string GetComponentNameString(int treeview_id);
     }
 }
